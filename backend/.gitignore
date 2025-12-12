@@ -1,0 +1,7 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+/src/generated/prisma
+/src/generatednpx prisma studio --config ./prisma.config.ts
+/src/generated/prisma

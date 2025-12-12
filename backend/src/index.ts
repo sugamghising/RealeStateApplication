@@ -14,10 +14,10 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.send("Hello from Backend.")
 })
 
 app.listen(PORT, () => {
-    console.log(`App listening to PORT ${PORT}`);
+    console.log(`🚀 App listening to PORT ${PORT}`);
 })
