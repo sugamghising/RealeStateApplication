@@ -43,7 +43,7 @@ export const loginUser = async (data: LoginInput) => {
         throw new Error("Invalid Credentials.");
     }
 
-    const token = await generateToken({ userId: user.id, role: user.role });
+    const token = await generateToken({ userId: user.id.toString(), role: user.role });
     return {
         token,
         user: {
