@@ -29,10 +29,11 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     try {
-        const user = await authServices.loginUser(parsed.data);
+        const result = await authServices.loginUser(parsed.data);
         return res.status(201).json({
             message: "User LoggedIn Successful.",
-            user
+            token: result.token,
+            user: result.user
         })
 
     } catch (error) {

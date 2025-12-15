@@ -1,4 +1,5 @@
 import { prisma } from "../lib/prisma"
+import { UpdateUserInput } from "../schemas/user.schema";
 
 export const getUsers = async () => {
     try {
@@ -19,6 +20,6 @@ export const getUserById = async (userId: string) => {
     return user;
 }
 
-// export const updateUser = async (userData:) => {
+export const updateUser = async (userData: UpdateUserInput) => {
 
-// }
+}
