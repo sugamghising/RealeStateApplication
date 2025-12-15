@@ -14,20 +14,22 @@ datasource db {
 }
 
 model Post {
-  id         Int         @id @default(autoincrement())
-  title      String
-  price      Int
-  address    String
-  city       String
-  bedroom    Int
-  bathroom   Int
-  latitude   String
-  longitude  String
-  type       Type
-  property   Property
-  createdAt  DateTime    @default(now())
-  user       User        @relation(fields: [userId], references: [id])
-  userId     Int
+  id        Int      @id @default(autoincrement())
+  title     String
+  price     Int
+  address   String
+  city      String
+  bedroom   Int
+  bathroom  Int
+  latitude  String
+  longitude String
+  type      Type
+  property  Property
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
   postDetail PostDetail?
   savedPosts SavedPost[]
   images     PostImage[]
@@ -67,18 +69,21 @@ model PostDetail {
 }
 
 model SavedPost {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  userId    Int
-  postId    Int
+  id Int @id @default(autoincrement())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId Int
+
   createdAt DateTime @default(now())
 
   @@unique([userId, postId])
 }
 
 model User {
-  id         Int         @id @default(autoincrement())
+  id         String      @id @default(uuid())
   email      String      @unique
   username   String      @unique
   password   String
@@ -106,8 +111,9 @@ model Chat {
 }
 
 model UserChat {
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
   chat   Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId Int
 
@@ -115,20 +121,24 @@ model UserChat {
 }
 
 model ChatSeen {
-  id     Int  @id @default(autoincrement())
-  userId Int
-  chat   Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  id Int @id @default(autoincrement())
+
+  userId String
+  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId Int
 
   @@unique([userId, chatId])
 }
 
 model Message {
-  id        Int      @id @default(autoincrement())
-  text      String   @db.Text
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int
-  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId    Int
+  id   Int    @id @default(autoincrement())
+  text String @db.Text
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  chat   Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId Int
+
   createdAt DateTime @default(now())
 }
