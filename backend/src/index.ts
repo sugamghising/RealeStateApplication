@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
+import authRouter from './routes/auth.route';
 
 const app = express();
 dotenv.config();
@@ -17,6 +18,10 @@ app.use(morgan('tiny'));
 app.get('/', (_req, res) => {
     res.send("Hello from Backend.")
 })
+
+
+app.use('/api/v1/auth', authRouter);
+
 
 app.listen(PORT, () => {
     console.log(`🚀 App listening to PORT ${PORT}`);
