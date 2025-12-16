@@ -21,5 +21,5 @@ export const getUserById = async (userId: string) => {
 }
 
 export const updateUser = async (userData: UpdateUserInput) => {
-
+    const { username, avatar } = userData;
 }
