@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as userServices from "../services/user.service"
 import { updateUserSchema } from "../schemas/user.schema"
+import { uploadToCloudinary } from "../utils/cloudinary";
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -53,7 +54,16 @@ export const updateUser = async (req: Request, res: Response) => {
         return res.status(400).json({ error: "Invalid update user data." })
     }
     try {
-        const updatedUser = userServices.updateUser(userId, parsed.data);
+        let avatarUrl: string | undefined;
+        if (req.file) {
+            avatarUrl = await uploadToCloudinary(req.file.buffer);
+        }
+
+        const updateData = {
+            ...parsed.data,
+            ...(avatarUrl && { avatar: avatarUrl })
+        };
+        const updatedUser = userServices.updateUser(userId, updateData);
         res.status(200).json({
             message: "User updated successfully",
             user: updatedUser

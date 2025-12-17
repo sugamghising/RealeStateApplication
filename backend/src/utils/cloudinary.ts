@@ -14,3 +14,16 @@ export const uploadToCloudinary = async (buffer: Buffer): Promise<string> => {
         ).end(buffer);
     });
 }
+
+// export const deleteFromCloudinary = async (imageUrl: string): Promise<void> => {
+//     try {
+//         // Extract public_id from URL
+//         const parts = imageUrl.split('/');
+//         const filename = parts[parts.length - 1];
+//         const publicId = `realstate/avatars/${filename.split('.')[0]}`;
+
+//         await cloudinary.uploader.destroy(publicId);
+//     } catch (error) {
+//         console.error('Error deleting image from Cloudinary:', error);
+//     }
+// };
