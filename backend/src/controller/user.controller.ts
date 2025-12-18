@@ -63,7 +63,7 @@ export const updateUser = async (req: Request, res: Response) => {
             ...parsed.data,
             ...(avatarUrl && { avatar: avatarUrl })
         };
-        const updatedUser = userServices.updateUser(userId, updateData);
+        const updatedUser = await userServices.updateUser(userId, updateData);
         res.status(200).json({
             message: "User updated successfully",
             user: updatedUser

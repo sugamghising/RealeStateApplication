@@ -45,7 +45,7 @@ export const updateUser = async (userId: string, userData: UpdateUserInput) => {
     if (userData.avatar !== undefined) {
         updateData.avatar = userData.avatar;
     }
-    return prisma.user.update({
+    const updatedUser = await prisma.user.update({
         where: { id: userId },
         data: updateData,
         select: {
@@ -56,6 +56,8 @@ export const updateUser = async (userId: string, userData: UpdateUserInput) => {
             avatar: true
         }
     })
+    console.log(updatedUser);
+    return updatedUser;
 }
 
 

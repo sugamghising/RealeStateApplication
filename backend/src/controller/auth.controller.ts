@@ -5,7 +5,7 @@ import * as authServices from "../services/auth.service"
 export const registerUser = async (req: Request, res: Response) => {
     const parsed = registerSchema.safeParse(req.body);
     if (!parsed.success) {
-        return res.status(400).json({ error: "Invalid register data." })
+        return res.status(400).json({ error: parsed.error })
     }
 
     try {
