@@ -40,6 +40,24 @@ export const getPost = async (postId: string) => {
 }
 
 
-export const addPost = async (postData: postType) => {
-
+export const addPost = async (userId: string, postData: postType) => {
+    const { title, price, address, city, bedroom, bathroom, longitude, latitude, type, property } = postData;
+    const post = await prisma.post.create({
+        data: {
+            title,
+            price,
+            address,
+            city,
+            bedroom,
+            bathroom,
+            longitude,
+            latitude,
+            type,
+            property,
+            user: {
+                connect: { id: userId }
+            }
+        }
+    })
+    return post
 }
